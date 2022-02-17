@@ -1,31 +1,11 @@
 "use strict";
 
-let div = document.getElementById("box");
+const noRuby = document.getElementById("noRuby");
+const ruby = document.getElementById("ruby");
 
-const encodeRuby = (line) => {
-    if(line.indexOf("｜") > -1
-        && line.indexOf("《") > -1
-        && line.indexOf("》") > -1)
-    {
-        return line.replace(
-            /｜(.*)《(.*)》/g,
-            "<ruby><rb>$1</rb><rp>(</rp><rt>$2</rt><rp>)</rp></ruby>"
-        );
-    }
-    return line;
-}
+console.log(noRuby.clientHeight);
+console.log(ruby.clientHeight);
 
-const addLine = (str) => {
-    const encoded = encodeRuby(str);
-    // console.log(encoded);
-    let p = document.createElement("p");
-    p.innerHTML = encoded;
-    div.appendChild(p);
-    let scaleP = document.createElement("p");
-    scaleP.innerText = p.clientWidth;
-    div.appendChild(scaleP);
-}
+// 'Kosugi' 仕様、line-height: 150% の場合、noRuby: 238, ruby: 273
 
-addLine("｜堕天男《ルシフアァー》");
-addLine("｜堕天男《ルシフアアァー》");
-addLine("｜堕天男《ルシフアアアルシフアアア》");
+// Firefox 以外で ruby タグを使いつつ、ルビの行間幅を固定する方法は現時点でないっぽい。
